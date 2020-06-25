@@ -1,10 +1,12 @@
 import React from 'react';
-import {SafeAreaView, Text, StyleSheet, View} from 'react-native';
+import {SafeAreaView, Text, StyleSheet, View, Linking} from 'react-native';
 import {useSelector} from 'react-redux';
 
 const Albums = () => {
 
   const asteroid = useSelector(state => state.asteroid.asteroid);
+
+  const goTo = () => Linking.openURL(asteroid.nasa_jpl_url);
 
   return (
     <SafeAreaView
@@ -24,7 +26,10 @@ const Albums = () => {
         <Text>
           {`Nasa Url: `}
         </Text>
-        <Text>{asteroid.nasa_jpl_url}</Text>
+        <Text
+          style={styles.link}
+          onPress={goTo}
+        >{asteroid.nasa_jpl_url}</Text>
       </View>
       <View
         style={styles.item}
@@ -45,8 +50,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#4C4C4C',
   },
+  link: {
+    color: 'aqua',
+  },
   item: {
     flexDirection: 'row',
-    marginVertical: 10
-  }
+    marginVertical: 10,
+  },
 });
